@@ -21,7 +21,7 @@ Please enter the goal state : G
 Output:
 
 BFS : A - B - E - G
-DFS : A - D - E - G
+DFS : A - B - C - D - E - F - G
 UCS : A - D - E - G
 
 

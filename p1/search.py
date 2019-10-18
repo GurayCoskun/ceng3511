@@ -1,5 +1,6 @@
 import sys
 import queue as Q
+from queue import PriorityQueue
 
 graph_txt = open("graph.txt", "r")
 graph = {}
@@ -55,18 +56,17 @@ def bfs(graph, start, goal):
             # mark node as explored
             explored.append(node)
 
-def dfs(graph, start, goal):
+def DFS(graph, start, goal):
     stack = [(start, [start])]
     visited = set()
     while stack:
         (vertex, path) = stack.pop()
         if vertex not in visited:
-            if vertex == goal:
+            if (vertex == goal):
                 return path
             visited.add(vertex)
-            for neighbor in graph[vertex]:
-                stack.append((neighbor, path + [neighbor]))
-
+            for neighbor in sorted(graph[vertex], reverse=True):
+                stack.append((neighbor[0], path + [neighbor[0]]))
 
 def ucs(graph, start, goal):
 
@@ -105,8 +105,8 @@ else:
         print("BFS : ", end="")
         print(*strBfs, sep=" - ")
 
-        dfs_list = dfs(adjacents, start, goal)
-        strDfs = ''.join(str(str2) for str2 in dfs_list)
+        dfs_list = DFS(adjacents, start,goal)
+        strDfs = ''.join((str2) for str2 in dfs_list)
         print("DFS : ", end="")
         print(*strDfs, sep=" - ")
 
